@@ -209,4 +209,7 @@ namespace SerialCommTester
 
 //https://www.codeproject.com/Articles/678025/Serial-Comms-in-Csharp-for-Beginners
 //http://codesamplez.com/programming/serial-port-communication-c-sharp
+//http://stackoverflow.com/questions/24421631/c-sharp-serialport-dsr-dtr-and-cts-rts-handshaking
+//http://stackoverflow.com/questions/41354705/how-to-know-the-input-buffer-of-the-serial-port-has-information-in-c
+
 
