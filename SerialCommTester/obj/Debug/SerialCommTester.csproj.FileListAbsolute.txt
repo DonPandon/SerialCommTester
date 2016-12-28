@@ -1,0 +1,9 @@
+C:\Users\might\OneDrive\Program Languages\C#\SerialPort\SerialCommTester\SerialCommTester\bin\Debug\SerialCommTester.exe.config
+C:\Users\might\OneDrive\Program Languages\C#\SerialPort\SerialCommTester\SerialCommTester\bin\Debug\SerialCommTester.exe
+C:\Users\might\OneDrive\Program Languages\C#\SerialPort\SerialCommTester\SerialCommTester\bin\Debug\SerialCommTester.pdb
+C:\Users\might\OneDrive\Program Languages\C#\SerialPort\SerialCommTester\SerialCommTester\obj\Debug\SerialCommTester.csprojResolveAssemblyReference.cache
+C:\Users\might\OneDrive\Program Languages\C#\SerialPort\SerialCommTester\SerialCommTester\obj\Debug\SerialCommTester.frmSerialComm.resources
+C:\Users\might\OneDrive\Program Languages\C#\SerialPort\SerialCommTester\SerialCommTester\obj\Debug\SerialCommTester.Properties.Resources.resources
+C:\Users\might\OneDrive\Program Languages\C#\SerialPort\SerialCommTester\SerialCommTester\obj\Debug\SerialCommTester.csproj.GenerateResource.Cache
+C:\Users\might\OneDrive\Program Languages\C#\SerialPort\SerialCommTester\SerialCommTester\obj\Debug\SerialCommTester.exe
+C:\Users\might\OneDrive\Program Languages\C#\SerialPort\SerialCommTester\SerialCommTester\obj\Debug\SerialCommTester.pdb
