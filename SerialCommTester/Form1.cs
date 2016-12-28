@@ -14,15 +14,12 @@ namespace SerialCommTester
     public partial class frmSerialComm : Form
     {
         SerialPort _PuertoSerial;    //Will control the port itself (object)
-        delegate void SetTextCallback(string text);   //functions not working properly
-        string InputData = String.Empty;              //functions not working properly
-
+        delegate void SetTextCallback(string text);
 
         public frmSerialComm()
         {
             InitializeComponent();  //funcion necesaria en puertos seriales. No editar
             getAvailablePorts();    //funcion local para inicializar los puertos disponibles en la computadora
-            //getAvailableFlowControl();  //funcional local para registrar los controles de flujo disponibles
         }
 
         //---------------------------------mis funciones--------------------------------------
@@ -68,42 +65,38 @@ namespace SerialCommTester
                 _PuertoSerial.ReadTimeout = 500; 
                 _PuertoSerial.WriteTimeout = 500;
 
+                _PuertoSerial.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);   //not working properly
                 _PuertoSerial.Open();
-                //_PuertoSerial.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);   //not working properly
             }
             else
             {
-                txtRecieve.Text = "Input selection missing 1 or more characteristics";
+                MessageBox.Show("Input selection missing 1 or more characteristics","", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                bool[] format = { true, true, true, false, false, false };
+                enableDisableGUI(format);
+
             }
         }
 
-        private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)  //not working properly
+        void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)  //not working properly
         {
-            //SerialPort testing = (SerialPort)sender;
-            //string indata = testing.ReadExisting();
-            //txtRecieve.Text += indata;
+            printReceivedText(_PuertoSerial.ReadExisting());
         }
 
-        //Probando ejemplos de pagina (incluida al final)
-        private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)    //not working properly
+        private void printReceivedText(string text)
         {
-            //_PuertoSerial.ReadLine();
-        }
-
-        //Probando ejemplos de pagina (incluida al final)
-        private void port_DataReceived_1(object sender, SerialDataReceivedEventArgs e)
-        {
-            InputData = _PuertoSerial.ReadExisting();
-            if (InputData != String.Empty)
+            // InvokeRequired required compares the thread ID of the
+            // calling thread to the thread ID of the creating thread.
+            // If these threads are different, it returns true.
+            if (this.txtSend.InvokeRequired)
             {
-                this.BeginInvoke(new SetTextCallback(SetText), new object[] { InputData });
+                SetTextCallback d = new SetTextCallback(printReceivedText);
+                this.Invoke(d, new object[] { text });
             }
-        }
-
-        //Probando ejemplos de pagina (incluida al final)
-        private void SetText(string text)
-        {
-            this.txtSend.Text += text;
+            else
+            {
+                this.txtRecieve.AppendText(text);
+                _PuertoSerial.DiscardInBuffer();
+            }
         }
 
         void enableDisableGUI(bool[] input)
@@ -165,10 +158,6 @@ namespace SerialCommTester
                 _PuertoSerial.Write("\r\n");
                 txtSend.Text = "";
             }
-            //else if (e.KeyChar < 32 || e.KeyChar > 126)       //everything must be transfered!
-            //{
-            //    e.Handled = true; // ignores anything else outside printable ASCII range
-            //}
             else
             {
                 _PuertoSerial.Write(e.KeyChar.ToString());
@@ -177,15 +166,15 @@ namespace SerialCommTester
 
         private void txtSend_KeyUp(object sender, KeyEventArgs e)
         {
-            try
-            {
-                txtRecieve.AppendText(_PuertoSerial.ReadExisting());
-                _PuertoSerial.DiscardInBuffer();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Message ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //try
+            //{
+            //    txtRecieve.AppendText(_PuertoSerial.ReadExisting());
+            //    _PuertoSerial.DiscardInBuffer();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message, "Message ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         private void btnClearTxts_Click(object sender, EventArgs e)
